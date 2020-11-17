@@ -1,4 +1,4 @@
-FFMPEG_INSTALL_DIR=/data/YOUR-FFMPEG-SDK-INSTALL-PATH
+FFMPEG_INSTALL_DIR=/data/PJT-ffmpeg/PJT-ffmpeg-4.2.4.for-study/ffmpeg-4.2.4.installed
 LIB_DIR=$(FFMPEG_INSTALL_DIR)/lib
 INC_DIR=$(FFMPEG_INSTALL_DIR)/include
 
@@ -49,6 +49,7 @@ EXAMPLES=       avio_dir_cmd                       \
                 remuxing                           \
                 resampling_audio                   \
                 scaling_video                      \
+		simple-memory-transcoder           \
                 transcode_aac                      \
                 transcoding                        \
 		vaapi_encode                       \
