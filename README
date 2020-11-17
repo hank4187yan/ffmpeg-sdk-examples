@@ -1,0 +1,4 @@
+FFmpeg examples :
+
+1. 将所有项目都改成了c++来编译；
+2. 此工程的ffmpeg库为 ffmpeg-4.2.4版本
