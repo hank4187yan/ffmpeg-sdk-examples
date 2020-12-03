@@ -2,3 +2,67 @@ FFmpeg examples :
 
 1. 将所有项目都改成了c++来编译；
 2. 此工程的ffmpeg库为 ffmpeg-4.2.4版本
+
+
+示例程序的功能说明
+1. avio_dir_cmd.cpp
+
+2. avio_reading.cpp
+
+3. decode_audio.cpp
+
+4. decode_video.cpp
+
+5. demuxing_decoding.cpp
+Desc:
+1> 解析输入文件的格式(.mp4, )，
+   逐帧读取输入文件，并将视频，音频分别解码成原始数据。
+2> 增加了SEI NALU的解析
+
+
+
+usage: 
+./demuxing_decoding [-refcount] input_file video_output_file audio_output_file
+
+If the -refcount option is specified, the program use the
+reference counting frame system which allows keeping a copy of
+the data for longer than one decode call.
+
+
+6. demuxing_insert_sps_pps.cpp
+
+7. encode_audio.cpp
+
+8. encode_video.cpp
+
+9. extract_mvs.cpp
+
+10. filter_audio.cpp
+
+11. filter_video.cpp
+
+12. http_multiclient.cpp
+
+13. hw_decode.cpp
+
+14. metadata.cpp
+
+15. muxing.cpp
+
+16. qsvdec.cpp
+
+17. remuxing.cpp
+
+18. resampling_audio.cpp
+
+19. scaling_video.cpp
+
+20. simple-memory-transcoder.cpp
+
+21. transcode_aac.cpp
+
+22. transcoding.cpp
+
+23. vaapi_encode.cpp
+
+24. vaapi_transcode.cpp

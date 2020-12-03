@@ -5,7 +5,7 @@ INC_DIR=$(FFMPEG_INSTALL_DIR)/include
 CC = gcc
 CXX = g++
 
-CFLAGS := -Wall -g -fPIC -lrt -lz -lpthread -D_GNU_SOURCE  -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS
+CFLAGS := -Wall -g -fPIC -lrt -lz -lpthread -D_GNU_SOURCE  -D__STDC_FORMAT_MACROS
 CFLAGS += $(addprefix -I, $(INC_DIR))
 
 #

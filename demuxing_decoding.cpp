@@ -61,6 +61,17 @@ static AVPacket pkt;
 static int video_frame_count = 0;
 static int audio_frame_count = 0;
 
+
+#define OPEN_SEI_NALU_DEC  1
+#define IS_SEI_NALU(pkt_data)   ( (pkt_data!=NULL) \
+								&&( ((pkt_data[0]==0x00)&&(pkt_data[1]=0x00)&&(pkt_data[2]=0x00)&&(pkt_data[3]==0x01)\
+										&&(pkt_data[4]=0x38)&&(pkt_data[5]==0x06)&&(pkt_data[6]==0x05)) \
+							     || ((pkt_data[0]==0x00)&&(pkt_data[1]=0x00)&&(pkt_data[2]=0x00)&&(pkt_data[3]==0x01)\
+							     		&&(pkt_data[4]==0x06)&&(pkt_data[5]==0x05)) ))
+#define GET_SEI_NALU_PAYLOAD_SIZE(pkt_data)  		((pkt_data[4]==0x38)?(pkt_data[7]):(pkt_data[6]))
+#define GET_SEI_NALU_PAYLOAD_START_POS(pkt_data)    ((pkt_data[4]==0x38)?(pkt_data+8):(pkt_data+7))
+
+
 /* Enable or disable frame reference counting. You are not supposed to support
  * both paths in your application but pick the one most appropriate to your
  * needs. Look for the use of refcount in this example to see what are the
@@ -75,6 +86,22 @@ static int decode_packet(int *got_frame, int cached)
     *got_frame = 0;
 
     if (pkt.stream_index == video_stream_idx) {
+#if OPEN_SEI_NALU_DEC
+		{
+			char* sei_nalu_buf = NULL;
+			int   sei_nalu_size = 0;
+			int   sei_nalu_payload_size = 0;
+			uint8_t* sei_nalu_payload_pos =  NULL;
+			if (IS_SEI_NALU(pkt.data)) {
+				sei_nalu_payload_size = GET_SEI_NALU_PAYLOAD_SIZE(pkt.data);
+				sei_nalu_payload_pos  = GET_SEI_NALU_PAYLOAD_START_POS(pkt.data);
+				if ((sei_nalu_payload_size > 0) && (sei_nalu_payload_size < 1024)) {
+					printf("SEI Message: %s\n", sei_nalu_payload_pos+16);
+				}
+			}
+			
+		}
+#endif
         /* decode video frame */
         ret = avcodec_decode_video2(video_dec_ctx, frame, got_frame, &pkt);
         if (ret < 0) {
