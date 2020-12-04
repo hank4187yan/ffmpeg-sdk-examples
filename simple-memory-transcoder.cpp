@@ -154,8 +154,8 @@ int main(int argc, char* argv[])
 
 
  
-	fp_open = fopen("vipkid_5592167_f_1554551997481_t_1554553671031.ts", "rb");	//视频源文件 
-	fp_write=fopen("vipkid_5592167_f_1554551997481_t_1554553671031.ts.h264","wb+"); //输出文件
+	fp_open = fopen("fixed_5592167_f_1554551997481_t_1554553671031.ts", "rb");	//视频源文件 
+	fp_write=fopen("fixed_5592167_f_1554551997481_t_1554553671031.ts.h264","wb+"); //输出文件
  
 	ifmt_ctx = avformat_alloc_context();
 	//avformat_alloc_output_context2(&ofmt_ctx, NULL, "h264", NULL);

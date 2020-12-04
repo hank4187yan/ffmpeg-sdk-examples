@@ -6,12 +6,43 @@ FFmpeg examples :
 
 示例程序的功能说明
 1. avio_dir_cmd.cpp
+DESC：
+通过 AVIOContext 来操作目录和文件
+
+usage: %s OPERATION entry1 [entry2]\n"
+            "API example program to show how to manipulate resources "
+            "accessed through AVIOContext.\n"
+            "OPERATIONS:\n"
+            "list      list content of the directory\n"
+            "move      rename content in directory\n"
+            "del       delete content in directory\n",
 
 2. avio_reading.cpp
+DESC:
+通过 AVIOContext 来读取和解析内存buffer中的内容；
+
+usage: 
+%s input_file\n"
+   "API example program to show how to read from a custom buffer "
+   "accessed through AVIOContext.\n"
+
 
 3. decode_audio.cpp
+DESC：
+通过 libavcodec 的API来解码音频编码文件成原始数据文件；
+
+Usage: 
+%s <input file> <output file>
+
 
 4. decode_video.cpp
+DESC:
+通过 libavcodec 的API来解码视频编码文件成原始数据文件；
+
+Usage: 
+%s <input file> <output file>
+
+
 
 5. demuxing_decoding.cpp
 Desc:
@@ -30,39 +61,207 @@ the data for longer than one decode call.
 
 
 6. demuxing_insert_sps_pps.cpp
+Desc:
+通过  libavformat and libavcodec API 来解析输入文件，
+对于视频的H.264数据，解析后，对每个IDR帧前插入一个SPS和PPS单元；
+
+usage: 
+%s [-refcount] input_file video_output_file audio_output_file\n"
+                "API example program to show how to read frames from an input file.\n"
+                "This program reads frames from a file, decodes them, and writes decoded\n"
+                "video frames to a rawvideo file named video_output_file, and decoded\n"
+                "audio frames to a rawaudio file named audio_output_file.\n\n"
+                "If the -refcount option is specified, the program use the\n"
+                "reference counting frame system which allows keeping a copy of\n"
+                "the data for longer than one decode call.
+
 
 7. encode_audio.cpp
+Desc:
+通过  libavcodec API  将自生成数据编码成.mp2 音频文件
+
+Usage: 
+%s <output file>
+
 
 8. encode_video.cpp
+Desc:
+通过  libavcodec API 将自生成的YUV帧编码成.h264 视频文件
+
+Usage: 
+%s <output file> <codec name>
+
 
 9. extract_mvs.cpp
+Desc:
+解码输入的文件，将视频编码帧中的运动估计等数据打印出来；
 
-10. filter_audio.cpp
+Usage: 
+%s <video_filename>
 
-11. filter_video.cpp
+
+
+10. filtering_audio.cpp
+Desc:
+使用 libavfilter API  将输入文件中的音频数据进行重采样后打印到屏幕上 
+
+Usage: 
+%s <Audio-filename>
+
+
+
+11. filtering_video.cpp
+DESC：
+解码视频文件，并调用视频的filter, 
+实现对解码后的帧进行缩放(scale) 并 逆时钟翻转90度(tanspose=cclorck); 
+
+Usage: 
+%s file
 
 12. http_multiclient.cpp
+DESC:
+libavformat multi-client network API的使用示例，
+本示例用于给文件提供一个基于HTTP的下载服务，
+对于建立连接的Http客户端，此服务将fork出进程，并文件下发给此客户端；
+
+usage: 
+%s input http://hostname[:port]\n"
+   "API example program to serve http to multiple clients.
+
 
 13. hw_decode.cpp
+DESC:
+使用硬件来加速解码的示例程序，
+展示了ffmpeg对硬件加速接口的使用；
+
+Usage: 
+%s <device type> <input file> <output file>
+
 
 14. metadata.cpp
+DESC：
+用于检测并展示媒体文件中的对ffmpeg版本，库版本的信息；
+
+usage:
+ %s <input_file>\n"
+"example program to demonstrate the use of the libavformat metadata API.
 
 15. muxing.cpp
+DESC：
+libavformat API 的使用示例，
+实现了对程序生成的音频数据，视频数据编码，打上同步的时间戳后，
+封装成输出文件匹配的封装格式后并输出；
+还支持输出图片格式；
+
+usage: %s output_file\n"
+               "API example program to output a media file with libavformat.\n"
+               "This program generates a synthetic audio and video stream, encodes and\n"
+               "muxes them into a file named output_file.\n"
+               "The output format is automatically guessed according to the file extension.\n"
+               "Raw images can also be output by using '%%d' in the filename.\n"
+
 
 16. qsvdec.cpp
+DESC:
+Intel 的 硬件QSV-accelerated  对 H.264 解码的示例；
+
+Usage: 
+%s <input file> <output file>
+
+
 
 17. remuxing.cpp
+DESC：
+libavformat/libavcodec 解封装 and 封装 API 的示例，
+用于将一种格式的输入文件解封装后，再封装成另一种格式的输出文件，
+同时还对时间戳进行了转换；
+
+usage: 
+%s input output\n"
+   "API example program to remux a media file with libavformat and libavcodec.\n"
+   "The output format is guessed according to the file extension.\n"
+
 
 18. resampling_audio.cpp
+DESC:
+libswresample API的使用示例，
+用于将程序生成的一种格式的原始音频帧后进行重采集后输出成另一种格式的原始音频帧
+
+Usage: 
+%s output_file\n"
+    "API example program to show how to resample an audio stream with libswresample.\n"
+    "This program generates a series of audio frames, resamples them to a specified "
+    "output format and rate and saves them to an output file named output_file.\n"
 
 19. scaling_video.cpp
+DESC:
+libswscale API的使用示例，
+用于将程序生成的YUV帧进行缩放后写到文件；
+
+Usage: 
+%s output_file output_size\n"
+    "API example program to show how to scale an image with libswscale.\n"
+    "This program generates a series of pictures, rescales them to the given "
+    "output_size and saves them to an output file named output_file\n."
+
 
 20. simple-memory-transcoder.cpp
+DESC:
+基于FFmpeg的内存读写来实现转码的例子（内存转码器）
+它是通过向ffmpeg的API,向ffmpeg注册内存读写的回调函数来实现的；
+
+本程序实现了任意格式视频数据（例如MPEG2）转码为H.264码流数据。
+本程序并不是对文件进行处理，而是对内存中的视频数据进行处理。
+它从内存读取数据，并且将转码后的数据输出到内存中。
+是最简单的使用FFmpeg读写内存的例子。
+
+Usage:
+%s  input_file output_file
 
 21. transcode_aac.cpp
+DESC：
+音频转码器示例，
+实现了对解析出输入文件的音频数据并解码，
+重采样、声道数、码率调整后，
+再编码、封装到输出文件中；
+
+Usage: 
+%s <input file> <output file>
+
 
 22. transcoding.cpp
+Desc:
+完整转码器示例，
+实现了对输入文件解析，音视频解码，filter, 编码，封装后再输出到文件；
+
+Usage: 
+%s <input file> <output file>
+
+
 
 23. vaapi_encode.cpp
+DESC:
+Intel 的硬件 VAAPI-accelerated 编码示例，
+基于内存读取数据的模式，实现了对输入YUV文件编码成H.264
+
+Usage:
+Usage: %s <width> <height> <input file> <output file>
+
 
 24. vaapi_transcode.cpp
+DESC:
+Intel 的硬件 VAAPI-accelerated 转码示例，
+实现了对输入文件进行解析 ，解码，编码，封装再输出；
+
+Usage: 
+%s <input file> <encode codec> <output file>\n"
+"The output format is guessed according to the file extension.\n"
+
+25. rtsp_puller.cpp
+DESC:
+实现了从RTSP服务端，拉取RTSP流并存成.mp4文件；
+
+26. rtmp_puller.cpp
+DESC：
+实现了从RTMP服务端，拉取RTMP流并存在.flv文件；
+
